@@ -1,0 +1,22 @@
+org: rbuckle
+app: klepto
+service: klepto
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+functions:
+  transfer:
+    handler: handler.transfer
+    events:
+      # Invoke Lambda function every morning at 04:05am
+      - schedule: cron(5 4 * * ? *)
+  generate:
+    handler: handler.generate
+    events:
+      # invoke on 27th October at 16:05
+      - schedule: cron(5 16 27 10 ? *)
